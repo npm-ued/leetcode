@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>两数之和</title>
+</head>
+<body>
+    <script>
+        var nums = [2, 11, 15, 7];
+        var target = 9;
+        // js 暴力法
+        function exec1(nums, target) {
+            var indexs = [];
+            var len = nums.length;
+            for(var i = 0; i<len; i++){
+                var temp = nums[i];
+                for(var j=i+1;j<len;j++ ) {
+                    var temp2 = nums[j];
+                    if(temp + temp2 == target) {
+                        indexs.push(i);
+                        indexs.push(j);
+                        return indexs;
+                    }
+                }
+            }
+        }
+        console.time();
+        console.log(exec1(nums,target));
+        console.timeEnd();
+        // 数据余量标记法
+        function exec2(nums, target) {
+            var len = nums.length;
+            var temp = [];
+            for(var i =0;i<len;i++) {
+                var diff = target - nums[i];
+                console.log(diff);
+                if(temp[diff] !== undefined) {
+                    return [temp[diff], i];
+                }
+                temp[nums[i]] = i;
+            }
+        }
+        console.time();
+        console.log(exec2(nums,target));
+        console.timeEnd();
+
+        // map
+        function exec3(nums, target) {
+            var map = new Map();
+            var len = nums.length;
+            for(var i = 0; i< len; i++ ){
+                var diff = target - nums[i];
+                if(map.has(diff)) {
+                    return [map.get(diff), i];
+                }
+                map.set(nums[i], i);
+            }
+        }
+        console.time();
+        console.log(exec3(nums,target));
+        console.timeEnd();
+
+
+    </script>
+</body>
+</html>
