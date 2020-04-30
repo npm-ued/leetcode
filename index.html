@@ -34,7 +34,6 @@
             var temp = [];
             for(var i =0;i<len;i++) {
                 var diff = target - nums[i];
-                console.log(diff);
                 if(temp[diff] !== undefined) {
                     return [temp[diff], i];
                 }
@@ -61,6 +60,22 @@
         console.log(exec3(nums,target));
         console.timeEnd();
 
+        // json
+        function exec4(nums, target) {
+            var json = {};
+            var len = nums.length;
+            for(var i = 0; i<len; i++) {
+                var diff  = target - nums[i];
+                if(json[diff]!= undefined) {
+                    return [json[diff], i];
+                }
+                json[nums[i]] = i;
+            }
+        }
+
+        console.time();
+        console.log(exec4(nums,target));
+        console.timeEnd();
 
     </script>
 </body>
