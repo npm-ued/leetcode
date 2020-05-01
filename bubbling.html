@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>冒泡排序</title>
+</head>
+
+<body>
+    <h1>冒泡排序</h1>
+    <script>
+        /*
+        * @Author: vicshang
+        * @Date: 2020-05-02 04:11:42
+ * @Last Modified by: vicshang
+ * @Last Modified time: 2020-05-02 04:44:56
+        * 冒泡排序
+        */
+        var nums = [6, 3, 8, 2, 119, 101]; // 需要排序的数组
+        // 通过循环比较获取最大值
+        function max(nums) {
+            var len = nums.length;
+            var max = nums[0];
+            for (var i = 0; i < len; i++){
+                if(max < nums[i]) {
+                    max = nums[i];
+                }
+            }
+            return max;
+        }
+        console.time();
+        console.log(max(nums));
+        console.timeEnd()
+
+        // 通过Math的max获取最大值
+        console.time();
+        console.log(Math.max.apply(null, nums));
+        console.timeEnd();
+
+        // 通过数组sort获取最大值
+        console.time();
+        console.log(nums.sort(function(a, b) {
+            return b - a;
+        })[0]);
+        console.timeEnd();
+
+        // 最小值和最大值同理
+
+
+        
+
+        // 冒泡排序
+        function sort(nums) {
+            var len = nums.length;
+            for (var i = 0; i < len; i++) {
+                for (var j = 0; j < len - i - 1; j++) {
+                    if (nums[j] < nums[j + 1]) {
+                        var temp;
+                        temp = nums[j + 1];
+                        nums[j + 1] = nums[j];
+                        nums[j] = temp;
+                    }
+                }
+            }
+            return nums;
+        }
+        
+        console.log(sort(nums)); // [9, 8, 6, 3, 2, 1]
+        // [6, 3] i=0, j=0
+        // [6, 8, 3] i=0, j=1
+        // [6, 8, 3, 2] i=0, j=2
+        // [6,8,3,9,2] i=0,j=3
+        // [6,8,3,9,2,1] i=0, j=4
+
+        //[]
+    </script>
+</body>
+
+</html>
