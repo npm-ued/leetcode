@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>快速排序</title>
+</head>
+
+<body>
+  <h1>快速排序</h1>
+  <p>
+    （1）在数据集之中，选择一个元素作为"基准"（pivot）。<br />
+    （2）所有小于"基准"的元素，都移到"基准"的左边；所有大于"基准"的元素，都移到"基准"的右边。<br />
+    （3）对"基准"左边和右边的两个子集，不断重复第一步和第二步，直到所有子集只剩下一个元素为止。<br />
+  </p>
+  <script>
+    // 基于数组连接的快速排序
+    function quickSort(nums) {
+      if (nums.length <= 1) { // 当数组中只有1个或0个元素时返回数组
+        return nums;
+      }
+      var len = nums.length;
+      var pivotIndex = Math.floor(nums.length / 2);
+      var pivot = nums.splice(pivotIndex, 1)[0]; // 剪切数组元素
+      var left = [];
+      var right = [];
+      len = nums.length;
+      for (var i = 0; i < len; i++) {
+        if (nums[i] < pivot) { // 小于基准放左边
+          left.push(nums[i]);
+        } else {
+          right.push(nums[i]); // 大于基准放右边
+        }
+      }
+      // 递归，通过数组连接
+      return quickSort(left).concat([pivot], quickSort(right));
+    }
+    console.time();
+    var sortArray = quickSort([85, 24, 63, 45, 17, 31, 96, 50]);
+    console.timeEnd();
+    console.log(sortArray);
+
+    // java方法
+    function quickSort2(nums, low, high) {
+      var i, j, temp, t;
+      if (low > high) {
+        return;
+      }
+      i = low;
+      j = high;
+      // temp就是基准位
+      temp = nums[low];
+      while (i < j) {
+        // 先看右边，依次往左递减
+        while (temp <= nums[j] && i < j) {
+          j--;
+        }
+        // 再看左边，依次往右递增
+        while (temp >= nums[i] && i < j) {
+          i++
+        }
+        if (i < j) {
+          t = nums[j];
+          nums[j] = nums[i];
+          nums[i] = t;
+        }
+      }
+      // 最后将基准为与i和j相等位置的数字交换
+      nums[low] = nums[i];
+      nums[i] = temp;
+      // 递归调用左半数组
+      quickSort2(nums, low, j - 1);
+      // 递归调用右半边数组
+      quickSort2(nums, j + 1, high);
+    }
+    var testArray2 = [6, 1, 2, 7, 9, 11, 4, 5, 10, 8];
+    quickSort2(testArray2, 0, testArray2.length - 1);
+    console.log(testArray2);
+
+
+    // 快速排序3
+    function swap(A, i, j) {
+      const t = A[i];
+      A[i] = A[j];
+      A[j] = t;
+    }
+
+    /**
+     *
+     * @param {*} A  数组
+     * @param {*} p  起始下标
+     * @param {*} r  结束下标 + 1
+     */
+    function divide(A, p, r) {
+      const x = A[r - 1];
+      let i = p - 1;
+
+      for (let j = p; j < r - 1; j++) {
+        if (A[j] <= x) {
+          i++;
+          swap(A, i, j);
+        }
+      }
+
+      swap(A, i + 1, r - 1);
+
+      return i + 1;
+    }
+
+    /**
+     * 
+     * @param {*} A  数组
+     * @param {*} p  起始下标
+     * @param {*} r  结束下标 + 1
+     */
+    function qsort(A, p = 0, r) {
+      r = r || A.length;
+      if (p < r - 1) {
+        const q = divide(A, p, r);
+        qsort(A, p, q);
+        qsort(A, q + 1, r);
+      }
+      return A;
+    }
+
+
+    var testArray3 = [85, 24, 63, 45, 17, 31, 96, 50];
+    console.time();
+    qsort(testArray3, 0, testArray3.length);
+    console.timeEnd();
+    console.log(testArray3);
+
+  </script>
+</body>
+
+</html>
