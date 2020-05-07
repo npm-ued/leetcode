@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>归并排序</title>
+</head>
+
+<body>
+    <h1>归并排序</h1>
+    <script>
+        function mergeSort(nums) {
+            var len = nums.length;
+            if (len < 2) {
+                return nums;
+            }
+            // 将数组拆分成2个数组
+            var middle = Math.floor(len / 2),
+                left = nums.slice(0, middle),
+                right = nums.slice(middle);
+            return merge(mergeSort(left), mergeSort(right));
+        }
+        // 合并，2个数组
+        function merge(left, right) {
+            console.log(JSON.stringify(left), JSON.stringify(right));
+            console.log('merge');
+            var result = [];
+            while (left.length && right.length) {
+                if (left[0] <= right[0]) { // 哪个小插入哪个
+                    result.push(left.shift());
+                } else {
+                    result.push(right.shift());
+                }
+            }
+            while (left.length) {
+                result.push(left.shift());
+            }
+            while (right.length) {
+                result.push(right.shift());
+            }
+            return result;
+        }
+        var testArray = [100, 3, 2, 5, 4, 7, 8, 91, 88];
+        console.log(testArray);
+        var testArrayNew = mergeSort(testArray);
+        console.log(testArrayNew);
+        function Recursion(depth) {
+            console.log('抱着');
+            if (!depth) {
+                console.log('我的小鲤鱼')
+            } else {
+                Recursion(--depth);  // 递归调用
+            }
+            console.log('的我' + depth);
+        }
+
+        console.log('吓得我抱起了');
+        Recursion(2);
+
+        function test1(num) {
+            console.log('1扯淡');
+            if(num == 0) {
+                return;
+            } else {
+                num--;
+                test2(num);
+            }
+            console.log('test1 aa'+ num);
+        }
+
+        function test2(num) {
+            console.log('2扯淡');
+            if(num == 0) {
+                return;
+            } else {
+                num--;
+                test1(num);
+            }
+            console.log('test2 bb' + num);
+        }
+        test1(3);
+    </script>
+</body>
+
+</html>

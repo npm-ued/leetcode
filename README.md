@@ -12,6 +12,7 @@
 * [选择排序](./selectsort.html)
 * [插入排序](./insertionsort.html)
 * [希尔排序](./shellsort.html)
+* [归并排序](./mergesort.html)
 
 
 
