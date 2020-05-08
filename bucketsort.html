@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>桶排序</title>
+</head>
+
+<body>
+  <h1>桶排序</h1>
+  <script>
+    function bucketSort(nums, bucketSize) {
+      if (nums.length === 0) {
+        return nums;
+      }
+      var i;
+      var minValue = nums[0]; // 最小值
+      var maxValue = nums[0]; // 最大值
+      var len = nums.length; // 数组长度
+      for (i = 0; i < len; i++) {
+        if (nums[i] < minValue) { // 与最小值对比
+          minValue = nums[i];
+        } else if (nums[i] > maxValue) { // 与最大值对比
+          maxValue = nums[i];
+        }
+      }
+      console.log(minValue);
+      console.log(maxValue);
+      // 桶的初始化
+      var DEFAULT_BUCKET_SIZE = 5; // 设置桶的默认数量5
+      bucketSize = bucketSize || DEFAULT_BUCKET_SIZE;
+      var bucketCount = Math.floor((maxValue - minValue) / bucketSize) + 1; // 桶里装的个数
+      var buckets = new Array(bucketCount);
+      for (i = 0; i < buckets.length; i++) {
+        buckets[i] = [];
+      }
+      // 利用映射函数将数据分配到各个桶中（大的数桶靠后）
+      for (i = 0; i < len; i++) {
+        buckets[Math.floor((nums[i] - minValue)/bucketSize)].push(nums[i]);
+      }
+      nums.length = 0; // 清空数组
+      for (i = 0; i < buckets.length; i++) {
+        insertionSort(buckets[i]); // 插入排序，排每个桶里的顺序
+        for (var j = 0; j< buckets[i].length; j++) {
+          nums.push(buckets[i][j]); // 把桶里的元素重新放到原始数组里
+        }
+      }
+      return nums;
+    }
+
+    // 插入排序
+    function insertionSort(nums) {
+      var len = nums.length; // 数组长度
+      var preIndex, current;
+      for (var i = 1; i < len; i++) {
+        preIndex = i - 1;
+        current = nums[i];
+        while (preIndex >= 0 && nums[preIndex] > current) {
+          nums[preIndex + 1] = nums[preIndex];
+          preIndex--;
+        }
+        nums[preIndex + 1] = current;
+      }
+      return nums;
+    }
+
+    var testArray = [100, 3, 2, 5, 4, 4, 7, 8, 91, 88];
+    bucketSort(testArray);
+    console.log(testArray);
+  </script>
+</body>
+
+</html>

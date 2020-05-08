@@ -13,6 +13,11 @@
 * [插入排序](./insertionsort.html)
 * [希尔排序](./shellsort.html)
 * [归并排序](./mergesort.html)
+* [堆排序]
+* [计数排序](./countingsort.html)
+* [桶排序](./bucketsort.html)
+* [基数排序](./radixsort.html)
+
 
 
 
@@ -21,12 +26,12 @@
 * 冒泡排序 ok
 * 选择排序 ok
 * 插入排序 ok
-* 希尔排序 
-* 归并排序
+* 希尔排序 ok
+* 归并排序 ok
 * 快速排序 ok
-* 堆排序
-* 计数排序
-* 桶排序
+* 堆排序 
+* 计数排序 ok
+* 桶排序 ok
 * 基数排序
 
 ### 参考链接

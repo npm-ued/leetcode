@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>计数排序</title>
+</head>
+
+<body>
+  <h1>计数排序</h1>
+  <p>
+    利用空数组的下标来计数排序
+  </p>
+  <script>
+    function countingSort(nums, maxValue) {
+      var bucket = new Array(maxValue + 1), // 空数组桶为最大数加1
+        sortedIndex = 0;
+      var len = nums.length; // 原数组的长度
+      var bucketLen = maxValue + 1; // 桶的长度
+      for (var i = 0; i < len; i++) {
+        if (!bucket[nums[i]]) { // 桶里是否有当前元素
+          bucket[nums[i]] = 0; // 以数为坐标 
+        }
+        bucket[nums[i]]++; // 有相同的数计数加1
+      }
+      console.log(bucket);
+      for (var j = 0; j < bucketLen; j++) {
+        while (bucket[j] > 0) { // 桶内有该元素
+          nums[sortedIndex++] = j; // 重新赋值数组的值
+          bucket[j]--;
+        }
+      }
+      return nums;
+    }
+    var testArray = [100, 3, 2, 5, 4, 4, 7, 8, 91, 88];
+    countingSort(testArray, 100);
+    console.log(testArray);
+  </script>
+</body>
+
+</html>

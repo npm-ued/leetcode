@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>基数排序</title>
+</head>
+
+<body>
+  <h1>基数排序</h1>
+  <script>
+    var counter = [];
+    /*
+      * nums @params{Array}
+      *
+    */
+    function radixSort(nums, maxDigit) {
+      var len = nums.length;
+      var mod = 10;
+      var dev = 1;
+      for (var i = 0; i < maxDigit; i++, dev *= 10, mod *= 10) {
+        for (var j = 0; j < len; j++) {
+          var bucket = parseInt((nums[j] % mod) / dev);
+          if (counter[bucket] == null) {
+            counter[bucket] = [];
+          }
+          counter[bucket].push(nums[j]);
+        }
+        var pos = 0;
+        for (var j = 0; j < counter.length; j++) {
+          var value = null;
+          if (counter[j] != null) {
+            while ((value = counter[j].shift()) != null) {
+              nums[pos++] = value;
+            }
+          }
+        }
+      }
+      return nums;
+    }
+    var testArray = [1000, 3, 2, 5, 4, 4, 7, 8, 91, 88];
+    radixSort(testArray, 100);
+    console.log(testArray);
+  </script>
+</body>
+
+</html>
