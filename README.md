@@ -26,13 +26,13 @@
 * 冒泡排序 ok
 * 选择排序 ok
 * 插入排序 ok
-* 希尔排序 ok
+* 希尔排序 
 * 归并排序 ok
 * 快速排序 ok
 * 堆排序 
 * 计数排序 ok
 * 桶排序 ok
-* 基数排序
+* 基数排序 ok
 
 ### 参考链接
 * [十大经典排序算法](https://www.runoob.com/w3cnote/ten-sorting-algorithm.html)
